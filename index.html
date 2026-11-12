@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>온기 ONGI — 동네 로스터리 카페</title>
+<meta name="description" content="매일 아침 직접 볶는 작은 로스터리. 서울 성수동의 조용한 골목에서 온기를 내립니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f0; --surface:#fffdfa; --ink:#2b211b; --muted:#7a6a5d;
+  --line:#e8ddd0; --accent:#9a5b34; --accent-soft:#f0e2d6; --shadow:rgba(60,40,25,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17120f; --surface:#1f1915; --ink:#f2e9e0; --muted:#a9968a;
+    --line:#332923; --accent:#d9975f; --accent-soft:#2c221b; --shadow:rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17120f; --surface:#1f1915; --ink:#f2e9e0; --muted:#a9968a;
+  --line:#332923; --accent:#d9975f; --accent-soft:#2c221b; --shadow:rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;
+  font-weight:300; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Noto Serif KR",Georgia,serif; font-weight:700; line-height:1.3; letter-spacing:-.02em; margin:0}
+.wrap{max-width:1080px; margin:0 auto; padding:0 16px}
+a{color:inherit}
+
+/* nav */
+header{position:sticky; top:0; z-index:50; background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px}
+.brand{font-family:"Noto Serif KR",serif; font-weight:700; font-size:1.15rem; letter-spacing:.04em; text-decoration:none}
+.brand small{display:block; font-family:"Noto Sans KR",sans-serif; font-weight:400; font-size:.6rem; letter-spacing:.3em; color:var(--muted); margin-top:-4px}
+.navlinks{display:flex; gap:28px; font-size:.9rem}
+.navlinks a{text-decoration:none; color:var(--muted); transition:color .2s}
+.navlinks a:hover{color:var(--accent)}
+@media (max-width:640px){ .navlinks{display:none} }
+
+/* hero */
+.hero{padding:clamp(72px,14vw,140px) 0 clamp(56px,10vw,110px); position:relative; overflow:hidden}
+.hero::after{content:""; position:absolute; inset:auto -10% -40% 55%; height:70vh;
+  background:radial-gradient(circle at 50% 50%, var(--accent-soft), transparent 68%); pointer-events:none; opacity:.9}
+.hero > .wrap{position:relative; z-index:1}
+.eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--accent); border:1px solid var(--line); border-radius:999px; padding:7px 16px; margin-bottom:26px; background:var(--surface)}
+.hero h1{font-size:clamp(2.4rem,7vw,4.3rem)}
+.hero h1 em{font-style:normal; color:var(--accent)}
+.hero p{max-width:46ch; color:var(--muted); font-size:clamp(1rem,2.2vw,1.12rem); margin:26px 0 36px}
+.cta{display:flex; flex-wrap:wrap; gap:12px}
+.btn{display:inline-block; text-decoration:none; padding:14px 30px; border-radius:999px; font-size:.92rem; font-weight:500;
+  border:1px solid var(--accent); transition:transform .18s, box-shadow .18s, background .18s}
+.btn-primary{background:var(--accent); color:#fff}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 26px var(--shadow)}
+.btn-ghost{background:transparent; color:var(--accent)}
+.btn-ghost:hover{background:var(--accent-soft)}
+
+/* sections */
+section{padding:clamp(60px,9vw,104px) 0; border-top:1px solid var(--line)}
+.sec-head{margin-bottom:44px; max-width:52ch}
+.sec-head span{font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent)}
+.sec-head h2{font-size:clamp(1.7rem,4.2vw,2.5rem); margin:12px 0 14px}
+.sec-head p{color:var(--muted); margin:0}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); gap:20px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:30px 26px;
+  transition:transform .22s, box-shadow .22s}
+.card:hover{transform:translateY(-4px); box-shadow:0 14px 34px var(--shadow)}
+.card .ico{display:block; margin-bottom:16px; width:34px; height:34px; color:var(--accent)}
+.card .ico svg{width:100%; height:100%; display:block}
+.card h3{font-size:1.12rem; margin-bottom:8px}
+.card p{color:var(--muted); font-size:.92rem; margin:0 0 18px}
+.price{font-family:"Noto Serif KR",serif; font-weight:500; color:var(--accent); font-size:1rem}
+
+.split{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,6vw,64px); align-items:center}
+@media (max-width:760px){ .split{grid-template-columns:1fr} }
+.split p{color:var(--muted)}
+.figure{aspect-ratio:4/3; border-radius:20px; border:1px solid var(--line);
+  background:linear-gradient(140deg,var(--accent-soft),var(--surface) 60%,var(--accent-soft));
+  display:grid; place-items:center; font-size:clamp(3rem,10vw,5rem)}
+
+.info{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px}
+.info dl{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:26px}
+.info dt{font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); margin-bottom:10px}
+.info dd{margin:0; font-size:.96rem}
+.info dd + dd{margin-top:4px; color:var(--muted); font-size:.88rem}
+
+footer{border-top:1px solid var(--line); padding:44px 0; color:var(--muted); font-size:.85rem}
+.foot{display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center}
+
+/* Hidden only when JS is running, so the page is fully readable without it. */
+.js .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+.js .reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1; transform:none; transition:none}
+  .card:hover,.btn-primary:hover{transform:none}
+}
+</style>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">온기<small>ONGI</small></a>
+      <div class="navlinks">
+        <a href="#menu">메뉴</a>
+        <a href="#about">소개</a>
+        <a href="#visit">찾아오시는 길</a>
+      </div>
+      <a class="btn btn-ghost" href="#visit" style="padding:9px 20px">예약 문의</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">성수동 로스터리</span>
+      <h1>오늘 아침에 볶은 원두로,<br><em>천천히 내립니다.</em></h1>
+      <p>하루 3kg만 로스팅합니다. 많이 팔기보다 제대로 내리는 쪽을 택했고, 그래서 어제의 커피는 오늘 팔지 않습니다.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#menu">메뉴 보기</a>
+        <a class="btn btn-ghost" href="#visit">오시는 길</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span>Signature</span>
+        <h2>시그니처 메뉴</h2>
+        <p>계절마다 산지를 바꿉니다. 지금은 에티오피아 구지와 콜롬비아 우일라를 쓰고 있습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h17v7a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7z"/><path d="M22 14h3a3.5 3.5 0 0 1 0 7h-3"/><path d="M10 3c-1 1.6-1 2.9 0 4.5M16 3c-1 1.6-1 2.9 0 4.5"/></svg></span>
+          <h3>온기 라떼</h3>
+          <p>고소한 다크 로스트에 통밀 시럽을 한 스푼. 단맛보다 곡물 향이 먼저 올라옵니다.</p>
+          <span class="price">6,000원</span>
+        </article>
+        <article class="card reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h20l-7 9h-6z"/><path d="M16 15v5"/><path d="M16 29c2.2 0 4-1.7 4-3.9 0-2.5-4-6.1-4-6.1s-4 3.6-4 6.1c0 2.2 1.8 3.9 4 3.9z"/></svg></span>
+          <h3>핸드드립 싱글</h3>
+          <p>당일 로스팅한 싱글 오리진 두 가지 중 선택. 바리스타가 산미를 먼저 여쭤봅니다.</p>
+          <span class="price">6,500원</span>
+        </article>
+        <article class="card reveal">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22c0-7.2 5.4-13 12-13s12 5.8 12 13v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M11 13.5 8.5 19M16 12.5 14 19M21 13.5 23.5 19"/></svg></span>
+          <h3>버터 스콘</h3>
+          <p>매일 오전 9시에 굽습니다. 보통 오후 2시면 떨어지니 서두르시는 편이 좋습니다.</p>
+          <span class="price">4,500원</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="split">
+        <div class="reveal">
+          <div class="sec-head" style="margin-bottom:20px">
+            <span>About</span>
+            <h2>작게 하는 편이<br>더 잘하는 길이라서</h2>
+          </div>
+          <p>2019년, 열두 평짜리 가게에서 시작했습니다. 로스터기 한 대와 그라인더 두 대가 전부였고 지금도 크게 다르지 않습니다.</p>
+          <p>규모를 키우는 대신 매일 같은 시간에 같은 품질을 내는 데 집중했습니다. 7년째 아침 7시에 문을 열고 있습니다.</p>
+        </div>
+        <div class="figure reveal" role="img" aria-label="로스터리 외관 이미지 자리">
+          <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:52%;height:auto;color:var(--accent);opacity:.75">
+            <path d="M18 34h84v44H18z"/><path d="M12 34 22 16h76l10 18z"/><path d="M10 78h100"/>
+            <path d="M46 78V56h20v22"/><path d="M30 44h8v8h-8zM82 44h8v8h-8z"/>
+            <path d="M34 16v18M58 16v18M82 16v18"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span>Visit</span>
+        <h2>찾아오시는 길</h2>
+        <p>성수역 3번 출구에서 도보 6분. 골목 안쪽이라 간판이 작으니 천천히 찾아보세요.</p>
+      </div>
+      <div class="info">
+        <dl class="reveal">
+          <dt>Address</dt>
+          <dd>서울 성동구 연무장길 00-0</dd>
+          <dd>1층 (성수역 3번 출구 도보 6분)</dd>
+        </dl>
+        <dl class="reveal">
+          <dt>Hours</dt>
+          <dd>월–금 07:00 – 20:00</dd>
+          <dd>토·일 09:00 – 18:00 · 매주 화요일 휴무</dd>
+        </dl>
+        <dl class="reveal">
+          <dt>Contact</dt>
+          <dd>02-000-0000</dd>
+          <dd>단체석 예약은 전화로만 받습니다</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 온기 ONGI Roastery</span>
+    <span>Instagram · Naver Map</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
